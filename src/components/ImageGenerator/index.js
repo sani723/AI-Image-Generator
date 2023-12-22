@@ -5,12 +5,14 @@ import default_image from "../../assets/images/gen-ai.webp";
 const ImageGenerator = () => {
 
     const [image_url, setImage_url] = useState("/");
+    const [loading, setLoading] = useState(false);
     let inputRef = useRef();
 
     const imgGenerator = async () => {
         if(inputRef.current.value === "") {
             return 0;
         }
+        setLoading(true);
 
         const response = await fetch("https://api.openai.com/v1/images/generations",{
                 method: "POST",
@@ -29,6 +31,7 @@ const ImageGenerator = () => {
         let data = await response.json();
         let data_array = data.data;
         setImage_url(data_array[0].url);
+        setLoading(false);
     }
 
   return (
@@ -37,6 +40,10 @@ const ImageGenerator = () => {
         <div className='img-loading'>
             <div className='image'>
                 <img src={image_url === "/" ? default_image : image_url} alt='' />
+                <div className='loading'>
+                    <div className={loading ? 'bar loading-bar-full' : 'bar loading-bar'}></div>
+                    <div className={loading ? 'loading-text' : 'hide'}>Loading...</div>
+                </div>
             </div>
         </div>
         <div className='search-box'>

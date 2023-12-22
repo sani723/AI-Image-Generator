@@ -57,3 +57,20 @@
     background: #DE1B89;
     cursor: pointer;
 }
+.bar { 
+    height: 8px;
+    background: #DE1B89;
+}
+.loading-bar {
+    width: 0;
+}
+.loading-text {
+    font-size: 18px;
+}
+.loading-bar-full {
+    width: 512px;
+    transition: 15s;
+}
+.hide {
+    display: none;
+}
